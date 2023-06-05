@@ -23,7 +23,7 @@ const styles = (props?: any) =>
     container: {
       marginTop: 20,
       backgroundColor: props.backgroundColor,
-      flex:1,
+      flex: 1,
     },
     title: {
       backgroundColor: props.topBackgroundColor,

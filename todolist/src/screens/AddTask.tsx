@@ -36,11 +36,16 @@ function AddTask({navigation}: addTaskScreenProps) {
     }
   };
 
-  const addTaskHandler = () =>{
-    const task:taskItem = {id:Math.random().toString(), title:title, backgroundColor: color, topBackgroundColor:topColor, miniTasks:miniTasks}
-    navigation.navigate('Home',{task});
-    
-  }
+  const addTaskHandler = () => {
+    const task: taskItem = {
+      id: Math.random().toString(),
+      title: title,
+      backgroundColor: color,
+      topBackgroundColor: topColor,
+      miniTasks: miniTasks,
+    };
+    navigation.navigate('Home', {task});
+  };
 
   return (
     <View style={styles.container}>
@@ -101,9 +106,7 @@ function AddTask({navigation}: addTaskScreenProps) {
         </TouchableOpacity>
       </View>
       <View>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={addTaskHandler}>
+        <TouchableOpacity style={styles.btn} onPress={addTaskHandler}>
           <Text style={styles.btnText}>Add new task +</Text>
         </TouchableOpacity>
       </View>
@@ -112,7 +115,9 @@ function AddTask({navigation}: addTaskScreenProps) {
           title={title}
           miniTasks={miniTasks}
           backgroundColor={color}
-          topBackgroundColor={topColor} id={''} />
+          topBackgroundColor={topColor}
+          id={''}
+        />
       </View>
     </View>
   );
@@ -188,9 +193,9 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
   },
-  taskPreview:{
-    flex:1,
-    alignItems:'stretch',
+  taskPreview: {
+    flex: 1,
+    alignItems: 'stretch',
   },
 });
 

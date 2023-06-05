@@ -29,7 +29,9 @@ function App(): React.JSX.Element {
           component={AddTask}
           options={{headerTitleAlign: 'center', title: 'Add a new task :D'}}
         />
-        <RootStack.Screen name="TaskView" component={TaskView}
+        <RootStack.Screen
+          name="TaskView"
+          component={TaskView}
           options={{headerTitleAlign: 'center', title: 'Task details'}}
         />
       </RootStack.Navigator>
