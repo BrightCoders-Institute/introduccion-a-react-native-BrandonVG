@@ -1,18 +1,52 @@
-import React from "react";
-import { TouchableOpacity, StyleSheet, Text, View } from "react-native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import React, {useEffect, useState} from 'react';
+import {TouchableOpacity, StyleSheet, Text, View, Alert} from 'react-native';
+import {StackScreenProps} from '@react-navigation/stack';
+import RootStackParamList from '../types/RootStackParamList';
+import taskItem from '../types/taskItem';
+import TaskList from '../components/tasksList';
 
-type HomeScreenProps = {
-  navigation: StackNavigationProp<RootStackParamList, 'Home'>;
-};
+type HomeScreenProps = StackScreenProps<RootStackParamList, 'Home'>;
 
-function Home({ navigation }: HomeScreenProps){
-  return(
+function Home({route, navigation}: HomeScreenProps) {
+  const [tasks, setTask] = useState<taskItem[]>([]);
+  const pressTaskHandler = (task: taskItem) =>{
+    navigation.navigate('TaskView', {task})
+  }
+  const longPressTaskHandler = (task: taskItem) =>{
+    Alert.alert('Delete task?',
+    'Do you want to delete the task? This action cannot be undone.',
+    [
+      {
+        text:'Cancel',
+        style:'cancel'
+      },
+      {
+        text: 'Delete',
+        onPress: () =>{
+          setTask((prevTasks) => prevTasks.filter((t) => t.id !== task.id));
+        }
+      }
+    ]
+    )
+  }
+
+  useEffect(() =>{
+    if (route.params?.task){
+      const newTask = route.params.task;
+      setTask((prevTasks) => [...prevTasks,newTask]);
+      navigation.setParams({ task: undefined });
+    }
+  }, [route.params?.task]);
+  return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.btn} onPress={() => {navigation.navigate('AddTask');}}>
+      <TaskList tasks={tasks} onPressTask={pressTaskHandler} onLongPressTask={longPressTaskHandler}/>
+      <TouchableOpacity
+        style={styles.btn}
+        onPress={() => {
+          navigation.navigate('AddTask');
+        }}>
         <Text style={styles.btnText}>+</Text>
       </TouchableOpacity>
-      <Text>Hola desde Home :D</Text>
     </View>
   );
 }
@@ -20,29 +54,29 @@ function Home({ navigation }: HomeScreenProps){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding:20,
+    padding: 20,
   },
   row: {
     flexDirection: 'row',
-    marginBottom:10,
+    marginBottom: 10,
   },
-  btn:{
+  btn: {
     alignItems: 'center',
     backgroundColor: '#0080ff',
     bottom: 10,
     borderRadius: 40,
-    elevation:5,
+    elevation: 5,
     height: 55,
-    justifyContent:'center',
+    justifyContent: 'center',
     position: 'absolute',
     right: 10,
     width: 55,
   },
-  btnText:{
+  btnText: {
     color: 'white',
-    fontSize:20,
-    fontWeight:'bold',
-  }
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
 });
 
 export default Home;

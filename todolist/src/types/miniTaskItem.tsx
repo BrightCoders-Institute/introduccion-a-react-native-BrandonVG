@@ -1,5 +1,7 @@
 type miniTaskItem = {
-  id: string,
-  task: string,
-  status: boolean
-}
+  id: string;
+  task: string;
+  status: boolean;
+};
+
+export default miniTaskItem;

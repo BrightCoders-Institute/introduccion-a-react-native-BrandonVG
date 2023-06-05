@@ -12,7 +12,7 @@ const MiniTask = (props: miniTaskProps) => {
 
   const toggleCheckBoxHandler = (newStatus: boolean) => {
     setToggleCheckBox(newStatus);
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -20,9 +20,9 @@ const MiniTask = (props: miniTaskProps) => {
         disabled={false}
         value={toggleCheckBox}
         onValueChange={toggleCheckBoxHandler}
+        tintColors={{true: '#000000', false: 'gray'}}
       />
-      <Text
-        style={toggleCheckBox ? styles.textDone : styles.textNoDone}>
+      <Text style={toggleCheckBox ? styles.textDone : styles.textNoDone}>
         {props.task}
       </Text>
     </View>
@@ -35,18 +35,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  textNoDone:{
-    fontSize:16,
+  textNoDone: {
+    fontSize: 16,
     color: 'black',
-    textDecorationLine: 'none'  
+    textDecorationLine: 'none',
   },
-  textDone:{
-    fontSize:16,
+  textDone: {
+    fontSize: 16,
     fontStyle: 'italic',
     color: 'gray',
     textDecorationLine: 'line-through',
     textDecorationColor: 'gray',
-  }
+  },
 });
 
 export default MiniTask;
